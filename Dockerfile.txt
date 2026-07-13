@@ -1,0 +1,88 @@
+# REBELLION_BOT_V2 - Dockerfile (Alpine)
+FROM python:3.11-alpine
+
+# Labels
+LABEL maintainer="Rebellion Security"
+LABEL version="2.0.0"
+LABEL description="REBELLION_BOT_V2 - Ultimate Cybersecurity Platform"
+
+# Install system dependencies
+RUN apk add --no-cache \
+    # Build tools
+    gcc \
+    musl-dev \
+    libffi-dev \
+    openssl-dev \
+    # Network tools
+    nmap \
+    netcat-openbsd \
+    curl \
+    iputils \
+    bind-tools \
+    traceroute \
+    whois \
+    # SSH
+    openssh-client \
+    openssh-server \
+    # Scapy dependencies
+    tcpdump \
+    libpcap-dev \
+    # Python build dependencies
+    python3-dev \
+    py3-pip \
+    # Additional
+    git \
+    bash \
+    coreutils \
+    procps \
+    # Nikto
+    perl \
+    wget
+
+# Install Nikto from source
+RUN wget https://github.com/sullo/nikto/archive/master.zip -O /tmp/nikto.zip && \
+    unzip /tmp/nikto.zip -d /opt/ && \
+    mv /opt/nikto-master /opt/nikto && \
+    ln -s /opt/nikto/program/nikto.pl /usr/local/bin/nikto && \
+    chmod +x /usr/local/bin/nikto
+
+# Create working directory
+WORKDIR /app
+
+# Copy requirements first (for caching)
+COPY requirements.txt requirements-full.txt ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-full.txt || true
+
+# Copy application files
+COPY rebellion_bot.py .
+COPY setup.sh run.sh ./
+COPY config/ ./config/
+
+# Create necessary directories
+RUN mkdir -p /app/.rebellion \
+    /app/rebellion_reports \
+    /app/temp \
+    /app/config
+
+# Make scripts executable
+RUN chmod +x setup.sh run.sh
+
+# Expose ports
+EXPOSE 5000  # Web Dashboard
+EXPOSE 4444  # Keylogger
+EXPOSE 5555  # Agent
+EXPOSE 8080  # Phishing Server
+
+# Environment variables
+ENV PYTHONUNBUFFERED=1
+ENV REBELLION_ENV=docker
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import socket; socket.create_connection(('localhost', 5000), timeout=5)" || exit 1
+
+# Run the application
+CMD ["python", "rebellion_bot.py"]

