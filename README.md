@@ -1,5 +1,7 @@
 # rebellion_bot
 
+<div align="center">
+
 [![GitHub stars](https://img.shields.io/github/stars/Iankulani/rebellion_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/rebellion_bot/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Iankulani/rebellion_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/rebellion_bot/network)
 [![GitHub watchers](https://img.shields.io/github/watchers/Iankulani/rebellion_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/rebellion_bot/watchers)
@@ -12,6 +14,8 @@
 [![Windows](https://img.shields.io/badge/Windows-Supported-blue?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Iankulani/rebellion_bot)
 [![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Bot-purple?style=for-the-badge&logo=hackthebox&logoColor=white)](https://github.com/Iankulani/rebellion_bot)
 [![Documentation](https://img.shields.io/badge/docs-Rebellion%20Bot-blue?style=for-the-badge&logo=readthedocs&logoColor=white)](https://iankulani.github.io/Rebellion-Bot-Doc/)
+
+</div>
 
 Rebellion Bot
 
