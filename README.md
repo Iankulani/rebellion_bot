@@ -34,6 +34,14 @@ Rebellion Bot can further support cybersecurity drills, penetration-testing work
 Security and accountability are central to responsible deployment. Rebellion Bot should implement authentication, role-based access controls, command validation, activity logging, and explicit authorization requirements. Potentially disruptive testing features should be restricted to approved environments, with safeguards against unauthorized access, covert surveillance, and interference with third-party systems.
 
 Rebellion Bot represents Accurate Cyber Defense's commitment to accessible, adaptable, and responsible cybersecurity innovation. By bringing communication integrations, security assessments, controlled attack simulations, and monitoring workflows together, the platform aims to help organizations understand their digital risks, improve their defenses, and build stronger cybersecurity practices.
+
+# How to cloje the repo
+
+```bash
+git clone https://github.com/Iankulani/rebellion_bot.git
+cd rebellion_bot
+``` 
+
 # Documenetation
 
 # References
