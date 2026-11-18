@@ -42,6 +42,11 @@ git clone https://github.com/Iankulani/rebellion_bot.git
 cd rebellion_bot
 ``` 
 
+# How to run
+
+```bash
+python3 rebellion_bot.py
+``` 
 # Documenetation
 
 # References
